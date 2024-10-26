@@ -1,0 +1,40 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import Navbar from "../components/Navbar.astro";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+
+    <ViewTransitions />
+  </head>
+  <body>
+    <Navbar />
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>Año: 2023</footer>
+
+    <script>
+      //Client Only
+      const footer = document.querySelector("footer") as HTMLElement;
+
+      const currentYear: number = new Date().getFullYear();
+
+      footer.innerText = `Año: ${currentYear}`;
+    </script>
+  </body>
+</html>
